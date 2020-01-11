@@ -130,6 +130,7 @@ class MapScreen: UIViewController {
             
             // take direction response from apple server
             for route in response.routes {
+                let steps = route.steps
                 self.mapView.addOverlay(route.polyline)
                 self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
@@ -159,7 +160,7 @@ class MapScreen: UIViewController {
         mapView.removeOverlays(mapView.overlays)
         directionsArray.append(directions)
         let _ = directionsArray.map { ($0.cancel) }
-        directionsArray.removeAll()
+//        directionsArray.removeAll()
     }
     
     @IBAction func goBtnPressed(_ sender: Any) {
