@@ -17,8 +17,9 @@ class MapScreen: UIViewController {
     
     let locationManager = CLLocationManager()
     let REGION_IN_METERS: Double = 100
-    
     var previousLocation: CLLocation?
+    let geoCoder = CLGeocoder()
+    var directionsArray: [MKDirections] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ class MapScreen: UIViewController {
         checkLocationServices()
     }
     
+    // MARK: - init and startup CLLocation and Map View
     func checkLocationServices() {
         // check device's setting > private > location services, if it's turned on
         if CLLocationManager.locationServicesEnabled() {
@@ -76,15 +78,7 @@ class MapScreen: UIViewController {
             break
         }
     }
-    
-    func centerViewOnUserLocation() {
-        // var location: CLLocation? { get } 'The most recently retrieved user location.'
-        if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: REGION_IN_METERS, longitudinalMeters: REGION_IN_METERS)
-            mapView.setRegion(region, animated: true)
-        }
-    }
-    
+
     func startTrackingUserLocation() {
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
@@ -97,13 +91,80 @@ class MapScreen: UIViewController {
         previousLocation = getCenterLocation(for: mapView)
     }
     
+    func centerViewOnUserLocation() {
+        // var location: CLLocation? { get } 'The most recently retrieved user location.'
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: REGION_IN_METERS, longitudinalMeters: REGION_IN_METERS)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
+    // get center location from map view at the center pin
     func getCenterLocation(for mapView: MKMapView) -> CLLocation {
         let latitude = mapView.centerCoordinate.latitude
         let longitude = mapView.centerCoordinate.longitude
         
         return CLLocation(latitude: latitude, longitude: longitude)
     }
-
+    
+    // MARK: - MKDirection Implement
+    func getDirctions() {
+        // var location: It is always a good idea to check the timestamp of the location stored in this property.
+        // If the receiver is currently gathering location data, but the minimum distance filter is large, the returned location might be relatively old.
+        // If it is, you can stop the receiver and start it again to force an update.
+        // locationManager.location?.coordinate: the user current location
+        guard let location = locationManager.location?.coordinate else {
+            // TODO: Infor user we don't have their current location
+            return
+        }
+        
+        let request = createDirectionsRequest(from: location)
+        // making a request by init MKDirections(request: ) ask the apple server to provide some directions for a route.
+        let directions = MKDirections(request: request)
+        resetMapView(withNew: directions)
+        
+        directions.calculate { (response, error) in
+            // TODO: Handle error if needed
+            // guard optional 'response' value
+            guard let response = response else { return } // TODO: Show response not available in an alert
+            
+            // take direction response from apple server
+            for route in response.routes {
+                self.mapView.addOverlay(route.polyline)
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+            }
+        }
+    }
+    
+    func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
+        let destinationCoordinate = getCenterLocation(for: mapView).coordinate
+        // startingLocation: user current location (locationManager.location?.coordinate)
+        let startingLocation = MKPlacemark(coordinate: coordinate)
+        // destination: map view center location
+        let destination = MKPlacemark(coordinate: destinationCoordinate)
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startingLocation)
+        request.destination = MKMapItem(placemark: destination)
+        // Using segment control or switch to handle different transport type in corresponding conditions
+        request.transportType = .automobile
+//        request.transportType = .transit
+//        request.transportType = .walking
+        request.requestsAlternateRoutes = true
+        
+        return request
+    }
+    
+    func resetMapView(withNew directions: MKDirections) {
+        mapView.removeOverlays(mapView.overlays)
+        directionsArray.append(directions)
+        let _ = directionsArray.map { ($0.cancel) }
+        directionsArray.removeAll()
+    }
+    
+    @IBAction func goBtnPressed(_ sender: Any) {
+        getDirctions()
+    }
 }
 
 extension MapScreen: CLLocationManagerDelegate {
@@ -136,6 +197,9 @@ extension MapScreen: MKMapViewDelegate {
         guard center.distance(from: previousLocation) > 50 else { return }
         self.previousLocation = center
         
+        // MARK: - GeoCodeLocation delegate Implement
+        geoCoder.cancelGeocode()
+        
         // can't call the GeoCoder all the time, otherwise it will failed
         geoCoder.reverseGeocodeLocation(center) { [weak self](placemarks, error) in
             guard let self = self else { return }
@@ -160,8 +224,12 @@ extension MapScreen: MKMapViewDelegate {
                 self.addressLbl.text = "\(streetNumber) \(streetName)"
             }
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolygonRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = .blue
         
-        
-        
+        return renderer
     }
 }

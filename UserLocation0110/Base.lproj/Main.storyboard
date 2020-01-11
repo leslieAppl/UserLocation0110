@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,14 +12,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapScreen" customModule="UserLocation0110" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywy-Nr-kQE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
                             </mapView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="idl-W8-cKd">
-                                <rect key="frame" x="187" y="388" width="40" height="40"/>
+                                <rect key="frame" x="167.66666666666666" y="346" width="40" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="Gha-hh-fVe"/>
@@ -27,7 +27,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="DQE-Xd-CEO">
-                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="728" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="KOC-Rf-myM"/>
@@ -36,6 +36,17 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWA-7t-4I2">
+                                <rect key="frame" x="275" y="628" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="JTI-N6-y4n"/>
+                                    <constraint firstAttribute="width" constant="60" id="bla-YY-eh3"/>
+                                </constraints>
+                                <state key="normal" image="go-removebg-preview"/>
+                                <connections>
+                                    <action selector="goBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v32-g9-Xev"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -46,8 +57,10 @@
                             <constraint firstItem="Ywy-Nr-kQE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZFw-Vf-A4w"/>
                             <constraint firstItem="DQE-Xd-CEO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ehu-fD-hcT"/>
                             <constraint firstItem="idl-W8-cKd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-40" id="hyX-kx-jmT"/>
+                            <constraint firstItem="DQE-Xd-CEO" firstAttribute="top" secondItem="LWA-7t-4I2" secondAttribute="bottom" constant="40" id="krm-po-8Fw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DQE-Xd-CEO" secondAttribute="bottom" id="oK7-Y4-LcF"/>
                             <constraint firstItem="Ywy-Nr-kQE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qbp-vF-ebC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LWA-7t-4I2" secondAttribute="trailing" constant="40" id="ydr-ck-l0H"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -62,6 +75,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="go-removebg-preview" width="225" height="225"/>
         <image name="pin" width="225" height="225"/>
     </resources>
 </document>
