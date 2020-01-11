@@ -16,19 +16,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywy-Nr-kQE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                             </mapView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="idl-W8-cKd">
+                                <rect key="frame" x="187" y="388" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Gha-hh-fVe"/>
+                                    <constraint firstAttribute="height" constant="40" id="QlJ-Wi-tWV"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="DQE-Xd-CEO">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="KOC-Rf-myM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Ywy-Nr-kQE" secondAttribute="bottom" id="T25-NU-X6C"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ywy-Nr-kQE" secondAttribute="bottom" id="4F7-yn-zkc"/>
+                            <constraint firstItem="idl-W8-cKd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PLl-O9-MNA"/>
                             <constraint firstItem="Ywy-Nr-kQE" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Xvu-1Y-oZz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DQE-Xd-CEO" secondAttribute="trailing" id="Yxi-Gh-8B6"/>
                             <constraint firstItem="Ywy-Nr-kQE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZFw-Vf-A4w"/>
+                            <constraint firstItem="DQE-Xd-CEO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ehu-fD-hcT"/>
+                            <constraint firstItem="idl-W8-cKd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-40" id="hyX-kx-jmT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DQE-Xd-CEO" secondAttribute="bottom" id="oK7-Y4-LcF"/>
                             <constraint firstItem="Ywy-Nr-kQE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qbp-vF-ebC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="addressLbl" destination="DQE-Xd-CEO" id="N8B-VA-ocw"/>
                         <outlet property="mapView" destination="Ywy-Nr-kQE" id="uXP-aZ-SUp"/>
                     </connections>
                 </viewController>
@@ -37,4 +61,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pin" width="225" height="225"/>
+    </resources>
 </document>
