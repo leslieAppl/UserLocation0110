@@ -3,6 +3,9 @@ User Location
 Source Refence: YouTube
 By: Sean Allen
 
+Description:
+An app of setting start piont and end point to search directions route on the map view, with the optional transport style: walk, automobile and transit.
+
 - v0.1.0 How to show user's location - Swift 4.2 - Xcode 10
     - MapKit; CoreLocation;
     - Background Process
@@ -17,4 +20,4 @@ By: Sean Allen
     - a routing app
 
 - v0.3.2 Added Start Button to set start location coordinate: CLLocationCoordinate2D
-- v0.3.3 Added transpot type icon
+- v0.3.3 Added transport type icon
