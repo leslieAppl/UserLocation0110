@@ -19,6 +19,7 @@ class MapScreen: UIViewController {
     let REGION_IN_METERS: Double = 100
     
     var previousLocation: CLLocation?
+    var directionsArray: [MKDirections] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +114,7 @@ class MapScreen: UIViewController {
         
         let request = createDirectionsrequest(from: location)
         let directions = MKDirections(request: request)
+        resetMapView(withNew: directions)
         
         directions.calculate { [unowned self](response, error) in
             // TODO: Handle error if needed
@@ -132,10 +134,17 @@ class MapScreen: UIViewController {
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: startingLocation)
         request.destination = MKMapItem(placemark: destination)
-//        request.transportType = .automobile
-//        request.requestsAlternateRoutes = true
+        request.transportType = .walking
+        request.requestsAlternateRoutes = true
         
         return request
+    }
+    
+    func resetMapView(withNew dirctions: MKDirections) {
+        mapView.removeOverlays(mapView.overlays)
+        directionsArray.append(dirctions)
+        let _ = directionsArray.map { $0.cancel() }
+        directionsArray.removeAll()
     }
     
     @IBAction func goBtnPressed(_ sender: Any) {
@@ -173,6 +182,8 @@ extension MapScreen: MKMapViewDelegate {
         guard center.distance(from: previousLocation) > 50 else { return }
         self.previousLocation = center
         
+        geoCoder.cancelGeocode()
+        
         // can't call the GeoCoder all the time, otherwise it will failed
         geoCoder.reverseGeocodeLocation(center) { [weak self](placemarks, error) in
             guard let self = self else { return }
@@ -202,6 +213,7 @@ extension MapScreen: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = .blue
+        renderer.lineWidth = 3
         
         return renderer
     }
