@@ -103,7 +103,44 @@ class MapScreen: UIViewController {
         
         return CLLocation(latitude: latitude, longitude: longitude)
     }
-
+    
+    func getDirections() {
+        // current user location
+        guard let location = locationManager.location?.coordinate else {
+            //TODO: Inform user we don't have their current location
+            return
+        }
+        
+        let request = createDirectionsrequest(from: location)
+        let directions = MKDirections(request: request)
+        
+        directions.calculate { [unowned self](response, error) in
+            // TODO: Handle error if needed
+            guard let response = response else { return } //TODO: Show respnse not available in an alert
+            for route in response.routes {
+                self.mapView.addOverlay(route.polyline)
+                
+            }
+        }
+    }
+    
+    func createDirectionsrequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
+        let destinationCoordinate = getCenterLocation(for: mapView).coordinate
+        let startingLocation = MKPlacemark(coordinate: coordinate)
+        let destination = MKPlacemark(coordinate: destinationCoordinate)
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startingLocation)
+        request.destination = MKMapItem(placemark: destination)
+//        request.transportType = .automobile
+//        request.requestsAlternateRoutes = true
+        
+        return request
+    }
+    
+    @IBAction func goBtnPressed(_ sender: Any) {
+        getDirections()
+    }
 }
 
 extension MapScreen: CLLocationManagerDelegate {
@@ -160,8 +197,12 @@ extension MapScreen: MKMapViewDelegate {
                 self.addressLbl.text = "\(streetNumber) \(streetName)"
             }
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = .blue
         
-        
-        
+        return renderer
     }
 }
