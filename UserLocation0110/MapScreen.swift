@@ -144,6 +144,9 @@ class MapScreen: UIViewController {
         request.source = MKMapItem(placemark: startingLocation)
         request.destination = MKMapItem(placemark: destination)
         request.transportType = .walking
+//        request.transportType = .automobile
+//        request.transportType = .transit
+        
         request.requestsAlternateRoutes = true
         
         return request

@@ -17,3 +17,4 @@ By: Sean Allen
     - a routing app
 
 - v0.3.2 Added Start Button to set start location coordinate: CLLocationCoordinate2D
+- v0.3.3 Added transpot type icon
