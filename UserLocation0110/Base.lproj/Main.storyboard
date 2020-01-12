@@ -47,11 +47,24 @@
                                     <action selector="goBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9hb-V2-waz"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4u-NG-I35">
+                                <rect key="frame" x="45" y="717" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="VtQ-Es-Ghq"/>
+                                    <constraint firstAttribute="width" constant="50" id="xD3-Ip-gcd"/>
+                                </constraints>
+                                <state key="normal" image="start"/>
+                                <connections>
+                                    <action selector="startBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fDB-mf-Fsl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="idl-W8-cKd" firstAttribute="centerY" secondItem="Ywy-Nr-kQE" secondAttribute="centerY" id="8ts-SZ-XtC"/>
+                            <constraint firstItem="d4u-NG-I35" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="45" id="TFQ-cD-8cQ"/>
                             <constraint firstItem="DQE-Xd-CEO" firstAttribute="top" secondItem="w3G-Zo-zQA" secondAttribute="bottom" constant="40" id="TJy-zI-0KR"/>
+                            <constraint firstItem="DQE-Xd-CEO" firstAttribute="top" secondItem="d4u-NG-I35" secondAttribute="bottom" constant="45" id="WTJ-IT-zI3"/>
                             <constraint firstItem="Ywy-Nr-kQE" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Xvu-1Y-oZz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DQE-Xd-CEO" secondAttribute="trailing" id="Yxi-Gh-8B6"/>
                             <constraint firstItem="Ywy-Nr-kQE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZFw-Vf-A4w"/>
@@ -66,7 +79,9 @@
                     </view>
                     <connections>
                         <outlet property="addressLbl" destination="DQE-Xd-CEO" id="N8B-VA-ocw"/>
+                        <outlet property="goBtn" destination="w3G-Zo-zQA" id="9oQ-Ej-x76"/>
                         <outlet property="mapView" destination="Ywy-Nr-kQE" id="uXP-aZ-SUp"/>
+                        <outlet property="startBtn" destination="d4u-NG-I35" id="FjW-Vm-1WT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -77,5 +92,6 @@
     <resources>
         <image name="go-removebg-preview" width="225" height="225"/>
         <image name="pin" width="225" height="225"/>
+        <image name="start" width="225" height="225"/>
     </resources>
 </document>

@@ -15,12 +15,18 @@ class MapScreen: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var addressLbl: UILabel!
     
+    @IBOutlet weak var startBtn: UIButton!
+    @IBOutlet weak var goBtn: UIButton!
+    
+    
     let locationManager = CLLocationManager()
     let REGION_IN_METERS: Double = 10000
     
     var previousLocation: CLLocation?
     var directionsArray: [MKDirections] = []
     
+    var startingLocation: CLLocationCoordinate2D?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +35,8 @@ class MapScreen: UIViewController {
         
         // CoreLocation Framework
         checkLocationServices()
+        
+        goBtn.isEnabled = false
     }
     
     func checkLocationServices() {
@@ -129,7 +137,7 @@ class MapScreen: UIViewController {
     
     func createDirectionsrequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
         let destinationCoordinate = getCenterLocation(for: mapView).coordinate
-        let startingLocation = MKPlacemark(coordinate: coordinate)
+        let startingLocation = MKPlacemark(coordinate: self.startingLocation!)
         let destination = MKPlacemark(coordinate: destinationCoordinate)
         
         let request = MKDirections.Request()
@@ -151,6 +159,12 @@ class MapScreen: UIViewController {
     @IBAction func goBtnPressed(_ sender: Any) {
         getDirections()
     }
+    
+    @IBAction func startBtnPressed(_ sender: Any) {
+        self.startingLocation = getCenterLocation(for: mapView).coordinate
+        goBtn.isEnabled = true
+    }
+    
 }
 
 extension MapScreen: CLLocationManagerDelegate {

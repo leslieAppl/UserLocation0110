@@ -15,3 +15,5 @@ By: Sean Allen
 - v0.3.0 MapKit Tutorial - Get Directions & Show on Map - Swift 4.2
     - MKDirections
     - a routing app
+
+- v0.3.2 Added Start Button to set start location coordinate: CLLocationCoordinate2D
