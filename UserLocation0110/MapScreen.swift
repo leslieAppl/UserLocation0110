@@ -16,7 +16,7 @@ class MapScreen: UIViewController {
     @IBOutlet weak var addressLbl: UILabel!
     
     let locationManager = CLLocationManager()
-    let REGION_IN_METERS: Double = 100
+    let REGION_IN_METERS: Double = 10000
     
     var previousLocation: CLLocation?
     var directionsArray: [MKDirections] = []
@@ -83,13 +83,14 @@ class MapScreen: UIViewController {
         if let location = locationManager.location?.coordinate {
             let region = MKCoordinateRegion.init(center: location, latitudinalMeters: REGION_IN_METERS, longitudinalMeters: REGION_IN_METERS)
             mapView.setRegion(region, animated: true)
+            
         }
     }
     
     func startTrackingUserLocation() {
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
-        centerViewOnUserLocation()
+//        centerViewOnUserLocation()
         
         // starting firing off locasion manager delegate method - didUpdateLocations:
         locationManager.startUpdatingLocation()

@@ -16,10 +16,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywy-Nr-kQE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="812"/>
                             </mapView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="idl-W8-cKd">
-                                <rect key="frame" x="187" y="388" width="40" height="40"/>
+                                <rect key="frame" x="187" y="386" width="40" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="Gha-hh-fVe"/>
@@ -50,17 +50,17 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ywy-Nr-kQE" secondAttribute="bottom" id="4F7-yn-zkc"/>
-                            <constraint firstItem="idl-W8-cKd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PLl-O9-MNA"/>
+                            <constraint firstItem="idl-W8-cKd" firstAttribute="centerY" secondItem="Ywy-Nr-kQE" secondAttribute="centerY" id="8ts-SZ-XtC"/>
                             <constraint firstItem="DQE-Xd-CEO" firstAttribute="top" secondItem="w3G-Zo-zQA" secondAttribute="bottom" constant="40" id="TJy-zI-0KR"/>
                             <constraint firstItem="Ywy-Nr-kQE" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Xvu-1Y-oZz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DQE-Xd-CEO" secondAttribute="trailing" id="Yxi-Gh-8B6"/>
                             <constraint firstItem="Ywy-Nr-kQE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZFw-Vf-A4w"/>
                             <constraint firstItem="DQE-Xd-CEO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ehu-fD-hcT"/>
-                            <constraint firstItem="idl-W8-cKd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-40" id="hyX-kx-jmT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DQE-Xd-CEO" secondAttribute="bottom" id="oK7-Y4-LcF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="w3G-Zo-zQA" secondAttribute="trailing" constant="40" id="q8d-2B-Xwc"/>
                             <constraint firstItem="Ywy-Nr-kQE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qbp-vF-ebC"/>
+                            <constraint firstItem="DQE-Xd-CEO" firstAttribute="top" secondItem="Ywy-Nr-kQE" secondAttribute="bottom" id="sFt-y5-cKa"/>
+                            <constraint firstItem="idl-W8-cKd" firstAttribute="centerX" secondItem="Ywy-Nr-kQE" secondAttribute="centerX" id="taC-KG-dlT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
